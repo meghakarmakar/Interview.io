@@ -16,7 +16,6 @@ import InterviewQuiz from './pages/InterviewQuiz.jsx'
 
 
 function App() {
-  // const user = false
 
   const {user, checkingAuth, getAuth} = useStore();  // checkingAuthi acts as a loading state to make an illusion of a loading effect when the user is being checked
   // // console.log("The authenticated user: ",user);
@@ -50,10 +49,6 @@ function App() {
       path: "/quiz",
       element: user ? <InterviewQuiz /> : <Navigate to="/" />
     },
-    // {
-    //   path: "/questions",
-    //   element: <InterviewQuestions />
-    // },
     {
       path: "/profile",
       element: user ? <Profile /> : <Navigate to="/" />
