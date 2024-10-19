@@ -28,19 +28,52 @@
       <div class="main-content">
         <header>
           <h2>Hai, Sekhar welcome to <span>Interview.io</span></h2>
-          <div class="search-bar">
-            <button class="notification-button">
-              <i class="fas fa-bell"></i>
-              <span class="notification-count">2</span>
-            </button>
-          </div>
         </header>
 
-        <div class="notifications">
-          <h3>Notifications</h3>
-          <p>You have one pending interview</p>
-          <p>You have attended a total of two interviews</p>
-          <button class="mark-read">Mark all as read</button>
+        <!-- Upcoming Interview Section -->
+        <div class="upcoming-interviews">
+          <h3>Upcoming Interviews</h3>
+          <ul class="event-list">
+            <li class="event-card">
+              <span class="event-date">Oct 20, 2024</span>
+              <div class="event-details">
+                <p>Company: TechCorp</p>
+                <p>Position: Software Engineer</p>
+                <p>Time: 2:00 PM</p>
+              </div>
+            </li>
+            <li class="event-card">
+              <span class="event-date">Oct 25, 2024</span>
+              <div class="event-details">
+                <p>Company: InnovateX</p>
+                <p>Position: Frontend Developer</p>
+                <p>Time: 11:00 AM</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Interview Feedback Request Section -->
+        <div class="feedback-section">
+          <div class="feedback-content">
+            <h3>Interview Feedback Request</h3>
+            <p>Request feedback from your interviewer or practice partner:</p>
+            <form class="feedback-form">
+              <textarea
+                rows="4"
+                placeholder="Enter your feedback request message..."
+              ></textarea>
+              <button class="submit-feedback">Request Feedback</button>
+            </form>
+          </div>
+
+          <!-- Interview Image Section -->
+          <div class="interview-image-section">
+            <img
+              src="freepik__upload__17472.jpeg"
+              alt="Interview Illustration"
+            />
+          </div>
         </div>
       </div>
     </div>
