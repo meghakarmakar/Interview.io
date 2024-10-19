@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 temp-storage
+backup
 .env
 .env.development.local
 .env.test.local
