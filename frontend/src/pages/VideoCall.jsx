@@ -262,7 +262,7 @@ const VideoCall = () => {
                 <div className="video-container flex justify-start items-center flex-wrap gap-2 ">
 
                     <div className="relative flex flex-col flex-wrap gap-2">
-                        <img ref={hiddenVoice} className='absolute top-2 left-2 bg-gray-500 bg-opacity-60 text-white px-2 py-1 rounded w-[50px]' src="../src/assets/no-noise.png" alt="" />
+                        <img ref={hiddenVoice} className='absolute right-0 top-0 bg-gray-500 bg-opacity-60 text-white px-2 py-1 rounded w-[50px]' src="../src/assets/no-noise.png" alt="" />
                         <video autoPlay playsInline muted ref={myVideo} width={450} className='rounded-lg h-auto'>
                         </video>
                         <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">
@@ -314,12 +314,24 @@ const VideoCall = () => {
 const Video = ({ peer }) => {
 
     const ref = useRef()
+    const hiddenPeerVoice = useRef()
 
     useEffect(() => {
         if (peer) {
             peer.on('stream', (stream) => {
                 if (ref.current) {
                     ref.current.srcObject = stream
+                }
+                // Get the audio tracks and monitor them
+                const audioTrack = stream.getAudioTracks()[0];
+  
+                // Set initial state (check if muted on initial load)
+                if(audioTrack.enabled == false){
+                    hiddenPeerVoice.current.style.display = 'block';
+
+                }
+                else{
+                    hiddenPeerVoice.current.style.display = 'none';
                 }
             })
         }
@@ -328,6 +340,7 @@ const Video = ({ peer }) => {
     return (
         <div className="relative">
             <video autoPlay playsInline ref={ref} width={450} className="rounded-lg h-auto" />
+            <img ref={hiddenPeerVoice} className='absolute top-2 left-2 bg-gray-500 bg-opacity-60 text-white px-2 py-1 rounded w-[50px]' src="../src/assets/no-noise.png" alt="" />
             <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">
                 Peer
             </div>

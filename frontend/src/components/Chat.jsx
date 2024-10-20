@@ -29,9 +29,8 @@ const Chat = () => {
 
     const handleSendMessage = () => {
         if (messageInput.trim()) {
-            socket.emit("send-chat-message", messageInput);
-            console.log(messages)
             setMessages((prevMessages) => [...prevMessages, { user: "Me", text: messageInput }]);
+            socket.emit("send-chat-message", messageInput);
             setMessageInput("");
         }
     };

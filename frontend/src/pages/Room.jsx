@@ -34,6 +34,8 @@ const Room = () => {
                 streamRef.current = stream;
                ref.current.srcObject = stream;
                stream.getTracks().forEach(track => track.enabled = false);
+               const videoTrack = streamRef.current.getVideoTracks()[0];
+               videoTrack.stop();
             })
             .catch((err) => {
                 console.log(err);
@@ -58,18 +60,36 @@ const Room = () => {
 
     const handleVoice = () => {
         const audioTrack = streamRef.current.getAudioTracks()[0];
+        console.log(audioTrack)
         if (audioTrack) {
             audioTrack.enabled = !audioTrack.enabled; // Toggle audio track
             myAudio.current.firstChild.src = audioTrack.enabled ? '../src/assets/mic.png' : '../src/assets/no-noise.png';
         }
     }
 
-    const handleVideo = () => {
+    const handleVideo = async () => {
         const videoTrack = streamRef.current.getVideoTracks()[0];
 
         if (videoTrack) {
-            videoTrack.enabled = !videoTrack.enabled; // Toggle video track
-            myVideo.current.firstChild.src = videoTrack.enabled ? '../src/assets/video-camera.png' : '../src/assets/no-video.png';
+
+            if(videoTrack.enabled){
+                videoTrack.enabled = false;
+                videoTrack.stop();
+                myVideo.current.firstChild.src = '../src/assets/no-video.png'
+            }
+            else{
+
+               await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+               .then((stream) => {
+                   streamRef.current = stream;
+                  ref.current.srcObject = stream;
+               }).catch((err)=>{
+                console.log(err)
+               })
+
+               videoTrack.enabled = true;
+               myVideo.current.firstChild.src = '../src/assets/video-camera.png'
+            }
         }
         
     }

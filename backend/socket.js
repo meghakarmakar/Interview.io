@@ -75,7 +75,7 @@ function initializeSocket(server) {
         // Handling chat messages
         socket.on('send-chat-message', (message) => {
             const userMessage = { user: socket.id, text: message };
-            io.emit('receive-message', userMessage);
+            socket.broadcast.emit('receive-message', userMessage);
         });
 
 
